@@ -16,9 +16,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
@@ -33,20 +31,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.jessimori.appclinicamedicasaludplus.ui.theme.AppClinicaMedicaSaludplusTheme
-import com.jessimori.appclinicamedicasaludplus.ui.theme.components.HealthCard
+import com.jessimori.appclinicamedicasaludplus.ui.theme.components.HealthCardWithAction
 
 class MainActivity : ComponentActivity() {
+
+    private fun navigateToSaturacion() {
+        startActivity(Intent(this, SaturacionOxigeno::class.java))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Install SplashScreen before super.onCreate()
         installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             AppClinicaMedicaSaludplusTheme {
-                // Animation state
                 var visible by remember { mutableStateOf(false) }
 
-                // Trigger animation when composable enters composition
                 LaunchedEffect(Unit) {
                     visible = true
                 }
@@ -61,7 +61,6 @@ class MainActivity : ComponentActivity() {
                         style = MaterialTheme.typography.titleLarge
                     )
 
-                    // ANIMATION 1: Fade In + Scale for Logo
                     AnimatedVisibility(
                         visible = visible,
                         enter = fadeIn(animationSpec = tween(1000)) +
@@ -79,7 +78,6 @@ class MainActivity : ComponentActivity() {
                         style = MaterialTheme.typography.displayLarge
                     )
 
-                    // ANIMATION 2: Slide In from bottom for HealthCards
                     AnimatedVisibility(
                         visible = visible,
                         enter = slideInVertically(
@@ -87,38 +85,25 @@ class MainActivity : ComponentActivity() {
                             animationSpec = tween(800, delayMillis = 300)
                         ) + fadeIn(animationSpec = tween(800, delayMillis = 300))
                     ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            HealthCard(
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            HealthCardWithAction(
                                 title = "Saturación de Oxígeno",
-                                value = "98%"
+                                value = "98%",
+                                buttonText = stringResource(R.string.saturacion_oxigeno),
+                                onClick = ::navigateToSaturacion
                             )
-                            Button(onClick = {
-                                startActivity(Intent(this@MainActivity, saturacion_oxigeno::class.java))
-                            }) {
-                                Text(stringResource(R.string.saturacion_oxigeno))
-                            }
-
-                            HealthCard(
+                            HealthCardWithAction(
                                 title = "Presión Arterial",
-                                value = "120/80"
+                                value = "120/80",
+                                buttonText = stringResource(R.string.presion_arterial),
+                                onClick = ::navigateToSaturacion
                             )
-                            Button(onClick = {
-                                startActivity(Intent(this@MainActivity, saturacion_oxigeno::class.java))
-                            }) {
-                                Text(stringResource(R.string.presion_arterial))
-                            }
-
-                            HealthCard(
+                            HealthCardWithAction(
                                 title = "Temperatura",
-                                value = "36.5°C"
+                                value = "36.5°C",
+                                buttonText = stringResource(R.string.temperatura),
+                                onClick = ::navigateToSaturacion
                             )
-                            Button(onClick = {
-                                startActivity(Intent(this@MainActivity, saturacion_oxigeno::class.java))
-                            }) {
-                                Text(stringResource(R.string.temperatura))
-                            }
                         }
                     }
                 }

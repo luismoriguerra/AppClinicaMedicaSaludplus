@@ -23,11 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".saturacion_oxigeno"
+            android:name=".SaturacionOxigeno"
             android:exported="false"
             android:theme="@style/Theme.AppClinicaMedicaSaludplus" />
         <activity
-            android:name=".resultado_test"
+            android:name=".ResultadoTest"
             android:exported="false"
             android:theme="@style/Theme.AppClinicaMedicaSaludplus" />
     </application>

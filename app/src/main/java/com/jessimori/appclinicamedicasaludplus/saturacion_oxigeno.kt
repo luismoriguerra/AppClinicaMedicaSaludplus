@@ -15,31 +15,35 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.jessimori.appclinicamedicasaludplus.ui.theme.AppClinicaMedicaSaludplusTheme
+import com.jessimori.appclinicamedicasaludplus.ui.theme.components.BackToHomeButton
+import com.jessimori.appclinicamedicasaludplus.ui.theme.components.GridButton
 
+class SaturacionOxigeno : ComponentActivity() {
 
-class saturacion_oxigeno : ComponentActivity() {
+    private fun navigateToResultado() {
+        startActivity(Intent(this, ResultadoTest::class.java))
+    }
+
+    private fun navigateToHome() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             AppClinicaMedicaSaludplusTheme {
-                Column() {
+                Column {
                     Box(contentAlignment = Alignment.BottomEnd) {
                         Image(
                             painterResource(R.drawable.cuadroblood),
@@ -47,7 +51,6 @@ class saturacion_oxigeno : ComponentActivity() {
                             modifier = Modifier.height(400.dp),
                             contentScale = ContentScale.Crop
                         )
-
                     }
                     Column(
                         modifier = Modifier
@@ -60,109 +63,54 @@ class saturacion_oxigeno : ComponentActivity() {
                             style = MaterialTheme.typography.headlineSmall
                         )
 
-                        // Grid 2x2 de botones
+                        // Grid 2x2 de botones usando componente reutilizable
                         Column(
                             modifier = Modifier.fillMaxWidth(),
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
-                            // Primera fila de botones
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(12.dp)
                             ) {
-                                Button(
-                                    onClick = {
-                                        startActivity(Intent(this@saturacion_oxigeno, resultado_test::class.java))
-                                    },
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .height(56.dp),
-                                    shape = RoundedCornerShape(12.dp)
-                                ) {
-                                    Text(
-                                        text = stringResource(R.string.saturacion_oxigeno),
-                                        fontSize = 12.sp,
-                                        textAlign = TextAlign.Center
-                                    )
-                                }
-                                Button(
-                                    onClick = {
-                                        startActivity(Intent(this@saturacion_oxigeno, resultado_test::class.java))
-                                    },
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .height(56.dp),
-                                    shape = RoundedCornerShape(12.dp)
-                                ) {
-                                    Text(
-                                        text = stringResource(R.string.conteo_sanguineo),
-                                        fontSize = 12.sp,
-                                        textAlign = TextAlign.Center
-                                    )
-                                }
+                                GridButton(
+                                    text = stringResource(R.string.saturacion_oxigeno),
+                                    onClick = ::navigateToResultado
+                                )
+                                GridButton(
+                                    text = stringResource(R.string.conteo_sanguineo),
+                                    onClick = ::navigateToResultado
+                                )
                             }
-
-                            // Segunda fila de botones
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(12.dp)
                             ) {
-                                Button(
-                                    onClick = {
-                                        startActivity(Intent(this@saturacion_oxigeno, resultado_test::class.java))
-                                    },
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .height(56.dp),
-                                    shape = RoundedCornerShape(12.dp)
-                                ) {
-                                    Text(
-                                        text = stringResource(R.string.ritmo_cardiaco),
-                                        fontSize = 12.sp,
-                                        textAlign = TextAlign.Center
-                                    )
-                                }
-                                Button(
-                                    onClick = {
-                                        startActivity(Intent(this@saturacion_oxigeno, resultado_test::class.java))
-                                    },
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .height(56.dp),
-                                    shape = RoundedCornerShape(12.dp)
-                                ) {
-                                    Text(
-                                        text = stringResource(R.string.nivel_glucosa),
-                                        fontSize = 12.sp,
-                                        textAlign = TextAlign.Center
-                                    )
-                                }
+                                GridButton(
+                                    text = stringResource(R.string.ritmo_cardiaco),
+                                    onClick = ::navigateToResultado
+                                )
+                                GridButton(
+                                    text = stringResource(R.string.nivel_glucosa),
+                                    onClick = ::navigateToResultado
+                                )
                             }
                         }
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        // Botón Volver a Inicio
-                        OutlinedButton(
-                            onClick = {
-                                startActivity(Intent(this@saturacion_oxigeno, MainActivity::class.java))
-                                finish()
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(48.dp),
-                            shape = RoundedCornerShape(12.dp)
-                        ) {
-                            Text(
-                                text = stringResource(R.string.volver_inicio),
-                                fontSize = 14.sp
-                            )
-                        }
+                        BackToHomeButton(
+                            text = stringResource(R.string.volver_inicio),
+                            onClick = ::navigateToHome
+                        )
                     }
                 }
             }
         }
     }
 }
+
+// Alias para compatibilidad con código existente
+@Deprecated("Use SaturacionOxigeno instead", ReplaceWith("SaturacionOxigeno"))
+typealias saturacion_oxigeno = SaturacionOxigeno
 
 
