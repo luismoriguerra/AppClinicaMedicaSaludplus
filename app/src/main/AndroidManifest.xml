@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".saturacion_oxigeno"
+            android:exported="false"
+            android:theme="@style/Theme.AppClinicaMedicaSaludplus" />
+        <activity
+            android:name=".resultado_test"
+            android:exported="false"
+            android:theme="@style/Theme.AppClinicaMedicaSaludplus" />
     </application>
 
 </manifest>

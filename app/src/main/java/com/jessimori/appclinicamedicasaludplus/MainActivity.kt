@@ -23,7 +23,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.jessimori.appclinicamedicasaludplus.ui.theme.AppClinicaMedicaSaludplusTheme
 import com.jessimori.appclinicamedicasaludplus.ui.theme.components.HealthCard
-import com.jessimori.appclinicamedicasaludplus.ui.theme.saturacion_oxigeno
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,21 +30,26 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppClinicaMedicaSaludplusTheme {
-                Column(modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = stringResource(R.string.frase),
-                        style = MaterialTheme.typography.titleLarge)
-                    //style = TextStyle(fontSize = 24.sp,fontWeight = FontWeight.Bold)
-                }
-                Column (modifier = Modifier.fillMaxSize(),
+                Column(
+                    modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center){
-                    Image(painterResource(R.drawable.logopulmon),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = stringResource(R.string.frase),
+                        style = MaterialTheme.typography.titleLarge
+                    )
+
+                    Image(
+                        painterResource(R.drawable.logopulmon),
                         contentDescription = stringResource(R.string.texto_logo),
-                        modifier = Modifier.height(240.dp))
-                    Text(text = stringResource(R.string.saturacion_oxigeno),
-                        style = MaterialTheme.typography.displayLarge)
-                    //style = TextStyle(fontSize = 72.sp, fontWeight = FontWeight.Bold))
+                        modifier = Modifier.height(240.dp)
+                    )
+
+                    Text(
+                        text = stringResource(R.string.saturacion_oxigeno),
+                        style = MaterialTheme.typography.displayLarge
+                    )
 
                     HealthCard(
                         title = "Saturación de Oxígeno",
@@ -56,6 +60,7 @@ class MainActivity : ComponentActivity() {
                     }) {
                         Text(stringResource(R.string.saturacion_oxigeno))
                     }
+
                     HealthCard(
                         title = "Presión Arterial",
                         value = "120/80"
@@ -65,6 +70,7 @@ class MainActivity : ComponentActivity() {
                     }) {
                         Text(stringResource(R.string.presion_arterial))
                     }
+
                     HealthCard(
                         title = "Temperatura",
                         value = "36.5°C"
