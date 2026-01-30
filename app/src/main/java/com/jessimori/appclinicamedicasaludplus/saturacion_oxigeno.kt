@@ -18,7 +18,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -139,6 +141,23 @@ class saturacion_oxigeno : ComponentActivity() {
                         }
 
                         Spacer(modifier = Modifier.height(16.dp))
+
+                        // Botón Volver a Inicio
+                        OutlinedButton(
+                            onClick = {
+                                startActivity(Intent(this@saturacion_oxigeno, MainActivity::class.java))
+                                finish()
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(48.dp),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Text(
+                                text = stringResource(R.string.volver_inicio),
+                                fontSize = 14.sp
+                            )
+                        }
                     }
                 }
             }

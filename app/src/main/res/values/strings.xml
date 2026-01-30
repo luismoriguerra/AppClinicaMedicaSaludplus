@@ -12,4 +12,5 @@
     <string name="nivel_glucosa">Nivel de Glucosa</string>
     <string name="resultado_test">Resultado del Test</string>
     <string name="detalles">Detalles</string>
+    <string name="volver_inicio">Volver a Inicio</string>
 </resources>
